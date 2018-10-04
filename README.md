@@ -1,2 +1,3 @@
 # django-vuesax
-Vuewsax for Django
+
+Vuesax for Django

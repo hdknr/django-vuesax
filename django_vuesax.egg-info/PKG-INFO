@@ -1,0 +1,28 @@
+Metadata-Version: 1.2
+Name: django-vuesax
+Version: 0.0.1
+Summary: Vuesax for Django
+Home-page: https://github.com/hdknr/django-vuesax
+Author: Hideki Nara of LaFoaglia,Inc.
+Author-email: gmail [at] hdknr.com
+Maintainer: LaFoglia,Inc.
+Maintainer-email: gmail [at] hdknr.com
+License: Simplfied BSD License
+Download-URL: https://github.com/hdknr/django-vuesax
+Description: # django-vuesax
+        
+        Vuesax for Django
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Simplifed BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
