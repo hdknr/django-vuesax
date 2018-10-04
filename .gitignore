@@ -18,7 +18,6 @@ build
 dist
 
 # django projects
-static
 media
 docs/build
 logs
