@@ -1,0 +1,29 @@
+*.log
+*.pyc
+*.retry
+.svn
+*.sqlite3
+
+# editors
+.ropeproject
+*~
+.*~
+*.swp
+*.sqllite3
+
+# python
+*.egg-info
+build
+dist
+
+# django projects
+static
+media
+docs/build
+logs
+archives
+node_modules
+
+# mac
+.DS_Store
+
