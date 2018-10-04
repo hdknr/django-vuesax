@@ -1,36 +1,75 @@
 {% extends "djvuesax/admin/index.html" %}
 {% load i18n %}
 
-{% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
-
 {% block sidebar %}{% endblock %}
 
+{% block content_title %}{% endblock %}
 {% block content %}
-<div id="content-main" class="container">
 
-  <div class="card-columns">
-
+<vs-row>
     {% for app in app_list %}
+    <vs-col vs-type="flex" vs-justify="left" vs-align="left" vs-w="2">
+      <vs-card actionable class="cardx">
+        <div slot="header">
+          <h3>
+              <a href="{{ app.app_url }}" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
+                  {{ app.name }}
+              </a>
+          </h3>
+        </div>
 
-    <div class="card">
-      <div class="card-header">
-        <a href="{{ app.app_url }}" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
-          {{ app.name }}</a>
-      </div>
+        <div style="margin-bottom:20px">
+        <table style="width: 100%;">
+          {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row" style="text-align:left;"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row" style="text-align: left;">{{ model.name }}</th>
+            {% endif %}
 
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
+            {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
 
+            {% if model.admin_url %}
+                {% if model.view_only %}
+                <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
+                {% else %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                {% endif %}
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+
+        </table>
+        </div>
+
+        <div slot="footer">
+        </div>
+
+        <!--
+        <div slot="footer">
+          <vs-row vs-justify="flex-end">
+            <vs-button vs-color="primary" vs-type="gradient" >View</vs-button>
+            <vs-button vs-color="danger" vs-type="gradient">Delete</vs-button>
+          </vs-row>
+        </div>
+      -->
+      </vs-card>
+    </vs-col>
     {% endfor %}
-  </div>
-</div>
+</vs-row> 
 {% endblock %}
 
 {% block extrahead %}{{ block.super }}
+<style>
+  .vs-col {margin:10px; display: table-cell; height:100%;  }
+</style>
 {% endblock %}
 
 {% block footer %}{{ block.super }}

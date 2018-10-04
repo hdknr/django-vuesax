@@ -1,5 +1,6 @@
 include *.md
 recursive-include * *.py
 recursive-include vuesax/templates *
+recursive-include vuesax/static *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]

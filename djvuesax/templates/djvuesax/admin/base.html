@@ -37,40 +37,58 @@
   <!-- Container -->
   <div id="container">
 
+    <!-- Navbar -->
     {% if not is_popup %}
-    <!-- Header -->
-    <div id="header">
-      <div id="branding">
-        {% block branding %}{% endblock %}
-      </div>
-      {% block usertools %}
-      {% if has_permission %}
-      <div id="user-tools">
-        {% block welcome-msg %}
-        {% trans 'Welcome,' %}
-        <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    <vs-navbar class="nabarx">
+        <vs-navbar-title>
+            {% block branding %}{% endblock %}
+        </vs-navbar-title>
+  
+        <vs-spacer></vs-spacer>
+  
+        {% block usertools %}
+        {% if has_permission %}
+          {% block welcome-msg %}
+          <vs-navbar-item>
+          {% trans 'Welcome,' %}
+          <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+          </vs-navbar-item>
+          {% endblock %}
+
+          {% block userlinks %}
+
+          {% if site_url %}
+          <vs-navbar-item>
+          <a href="{{ site_url }}">{% trans 'View site' %}</a> 
+          </vs-navbar-item>
+          {% endif %}
+
+          {% if user.is_active and user.is_staff %}
+          <vs-navbar-item>
+            {% url 'django-admindocs-docroot' as docsroot %}
+              {% if docsroot %}
+              <a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
+            {% endif %}
+          </vs-navbar-item>
+          {% endif %}
+
+          {% if user.has_usable_password %}
+          <vs-navbar-item>
+            <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a>
+          </vs-navbar-item>
+          {% endif %}
+
+          <vs-navbar-item>
+          <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+          </vs-navbar-item>
+          {% endblock %}
+        {% endif %}
         {% endblock %}
-        {% block userlinks %}
-        {% if site_url %}
-        <a href="{{ site_url }}">{% trans 'View site' %}</a> /
-        {% endif %}
-        {% if user.is_active and user.is_staff %}
-        {% url 'django-admindocs-docroot' as docsroot %}
-        {% if docsroot %}
-        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-        {% endif %}
-        {% endif %}
-        {% if user.has_usable_password %}
-        <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-        {% endif %}
-        <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-        {% endblock %}
-      </div>
-      {% endif %}
-      {% endblock %}
+
       {% block nav-global %}{% endblock %}
-    </div>
-    <!-- END Header -->
+    </vs-navbar>
+    <!--/ Navbar -->
+
     {% block breadcrumbs %}
     <div class="breadcrumbs">
       <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
@@ -88,15 +106,15 @@
     {% endblock messages %}
 
     <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
+    <div id="content">
       {% block pretitle %}{% endblock %}
       {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+
       {% block content %}
-      {% block object-tools %}{% endblock %}
-      {{ content }}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
       {% endblock %}
       {% block sidebar %}{% endblock %}
-      <br class="clear">
     </div>
     <!-- END Content -->
 
