@@ -3,6 +3,7 @@
 *.retry
 .svn
 *.sqlite3
+__pycache__
 
 # editors
 .ropeproject
